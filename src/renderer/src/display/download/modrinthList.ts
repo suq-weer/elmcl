@@ -5,7 +5,7 @@ async function getModrinthProjects(
   facets: string[],
   offset: number,
   limit: number
-): Promise<DownloadBaseList> {
+): Promise<{ list: DownloadBaseList['list'] } | { list: [] }> {
   const params: ApiSearchParams = {
     query: '',
     facets: facets,

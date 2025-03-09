@@ -1,0 +1,48 @@
+name: Build and Upload Artifacts
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        build-command: [build:win, build:mac, build:linux]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build project
+        run: yarn ${{ matrix.build-command }}
+
+      - name: Compress dist folder
+        run: |
+          if [[ ${{ runner.os }} == 'Windows' ]]; then
+            Compress-Archive -Path dist/* -DestinationPath dist.zip
+          elif [[ ${{ runner.os }} == 'macOS' ]]; then
+            zip -r dist.zip dist/
+          else
+            zip -r dist.zip dist/
+          fi
+
+      - name: Upload dist.zip as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-${{ matrix.os }}
+          path: dist.zip

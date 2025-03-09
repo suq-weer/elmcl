@@ -7,14 +7,14 @@ const props = defineProps({
   category: String
 })
 
-const projects = ref<DownloadBaseList['list']>([])
+const projects = ref<DownloadBaseList['list']>()
 const currentCategory = ref('')
 let offset = 0 // 添加 offset 变量
 let loading = ref(false)
 
 const fetchProjects = async (offset: number): Promise<void> => {
   try {
-    let response: DownloadBaseList['list']
+    let response: DownloadBaseList | { list: [] } = { list: [] }
     if (props.category === 'mod') {
       currentCategory.value = '模组'
       response = await getModrinthProjects(['project_type=mod'], offset, 10)
@@ -37,7 +37,9 @@ const fetchProjects = async (offset: number): Promise<void> => {
     }
 
     if (response && Array.isArray(response.list)) {
-      projects.value = [...projects.value, ...response.list] // 合并新数据
+      if (projects.value) {
+        projects.value = [...projects.value, ...response.list]
+      } // 合并新数据
       loading.value = false
     } else {
       console.error('Invalid or empty response:', response)
