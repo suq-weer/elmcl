@@ -25,10 +25,10 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       - name: Build project
-        run: yarn ${{ matrix.build-command }}
+        run: npm run ${{ matrix.build-command }}
         if: matrix.os == 'windows-latest' && matrix.build-command == 'build:win' ||
           matrix.os == 'macos-latest' && matrix.build-command == 'build:mac' ||
           matrix.os == 'ubuntu-latest' && matrix.build-command == 'build:linux'
