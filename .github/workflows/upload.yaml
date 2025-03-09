@@ -14,7 +14,6 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
-        build-command: ['build:win', 'build:mac', 'build:linux']
 
     steps:
       - name: Checkout code
@@ -30,6 +29,9 @@ jobs:
 
       - name: Build project
         run: yarn ${{ matrix.build-command }}
+        if: matrix.os == 'windows-latest' && matrix.build-command == 'build:win' ||
+          matrix.os == 'macos-latest' && matrix.build-command == 'build:mac' ||
+          matrix.os == 'ubuntu-latest' && matrix.build-command == 'build:linux'
 
       - name: Compress dist folder
         run: |
@@ -42,7 +44,7 @@ jobs:
           fi
 
       - name: Upload dist.zip as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dist-${{ matrix.os }}
           path: dist.zip
