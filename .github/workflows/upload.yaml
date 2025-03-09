@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
-        build-command: [build:win, build:mac, build:linux]
+        build-command: ['build:win', 'build:mac', 'build:linux']
 
     steps:
       - name: Checkout code
