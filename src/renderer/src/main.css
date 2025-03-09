@@ -1,0 +1,90 @@
+/* global font */
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url("./assets/icon/MDIcon.woff2") format("woff2");
+}
+
+.material-icons {
+    font-family: "Material Icons", serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+/* https://fonts.googleapis.com/icon?family=Material+Icons+Outlined */
+@font-face {
+    font-family: 'Material Icons Outlined';
+    font-style: normal;
+    font-weight: 400;
+    src: url("assets/icon/MDIconOutlined.woff2") format('woff2');
+}
+
+.material-icons-outlined {
+    font-family: 'Material Icons Outlined', serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+  font-family: "LXGWGBScreen";
+  src: url("assets/icon/LXGWWenKaiGBScreen.ttf") format("truetype");
+}
+
+/* global-keyframes */
+@keyframes start {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+@keyframes up {
+  from {
+    margin-top: 50vh
+  }
+  to {
+    margin-top: 0
+  }
+}
+
+/* scroll Bar */
+/* 滚动条整体样式 */
+::-webkit-scrollbar {
+  width: 10px; /* 滚动条宽度 */
+  height: 10px; /* 滚动条高度 */
+}
+
+/* 滚动条滑块样式 */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(var(--mdui-color-on-secondary-container)); /* 滚动条滑块颜色 */
+  border-radius: 5px; /* 滚动条滑块圆角 */
+}
+
+/* 滚动条轨道样式 */
+::-webkit-scrollbar-track {
+  background-color: rgba(0,0,0,0); /* 滚动条滑块颜色 */
+}
